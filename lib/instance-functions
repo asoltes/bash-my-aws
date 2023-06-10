@@ -28,14 +28,14 @@ instances() {
     --output text                       \
     --query "
       Reservations[].Instances[][
-        InstanceId,
-        ImageId,
-        InstanceType,
-        State.Name,
         [Tags[?Key=='Name'].Value][0][0],
-        LaunchTime,
-        Placement.AvailabilityZone,
-        VpcId
+        InstanceId,
+        PrivateIpAddress,
+        PublicIpAddress,
+        InstanceType,
+        PlatformDetails,
+        State.Name,
+        Placement.AvailabilityZone
       ]"                |
   grep -E -- "$filters" |
   LC_ALL=C sort -b -k 6 |
